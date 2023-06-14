@@ -17,7 +17,7 @@ export default function RecordModal({
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const { settings } = useSettingsContext();
 
-  const { numOfColumns, numOfRows, mineRatio } = settings;
+  const { numOfColumns, mineRatio } = settings;
 
   const { label } = Object.values(difficultiesDict).find((d) => d.mineRatio === mineRatio)!;
   const { w, h } = Object.values(sizesDict).find((s) => s.w === numOfColumns)!;

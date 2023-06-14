@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGameStateContext } from "../../hooks/useGameStateContext";
 import { useSettingsContext } from "../../hooks/useSettingsContext";
-import { difficultiesDict, sizesDict } from "../../utils/settings";
 import RecordModal from "../recordModal/RecordModal";
 import styles from "../../styles/counter.module.scss";
 
