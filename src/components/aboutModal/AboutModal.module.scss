@@ -1,0 +1,27 @@
+.dialog {
+  width: 360px;
+  padding: 16px;
+  header {
+    text-align: center;
+    h1 {
+      font-size: 28px;
+      font-family: "rs-quill";
+      text-shadow: 2px 2px black;
+    }
+  }
+  section {
+    display: flex;
+    padding: 8px;
+    border-radius: 8px;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+    background-image: url("/images/bg-dark.png");
+    h2 {
+      font-size: 18px;
+      font-weight: normal;
+      text-align: center;
+      margin: 0;
+    }
+  }
+}

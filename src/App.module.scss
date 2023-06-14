@@ -1,0 +1,11 @@
+.board {
+  --gap: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.row {
+  display: flex;
+  gap: var(--gap);
+}
