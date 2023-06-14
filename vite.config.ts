@@ -31,5 +31,5 @@ export default defineConfig({
       },
     }),
   ],
-  base: "/",
+  base: "/runesweeper/",
 });
