@@ -2,22 +2,28 @@ import { useEffect, useState } from "react";
 import { useGameStateContext } from "../../hooks/useGameStateContext";
 import { useSettingsContext } from "../../hooks/useSettingsContext";
 import { difficultiesDict, sizesDict } from "../../utils/settings";
+import RecordModal from "../recordModal/RecordModal";
 import styles from "../../styles/counter.module.scss";
 
 export default function Timer() {
   const { gameState, setGameState } = useGameStateContext();
   const { settings } = useSettingsContext();
   const [timeElapsed, setTimeElapsed] = useState(0);
+  const [recordModalShown, setRecordModalShown] = useState(false);
+  const [record, setRecord] = useState<number | null>(null);
+  const [prevRecord, setPrevRecord] = useState<number | null>(null);
 
   const { status } = gameState;
   const { numOfColumns, numOfRows, mineRatio } = settings;
 
-  const currentFormatKey = `${numOfColumns * numOfRows}tiles${mineRatio}mineRatio`;
-  const recordTime = localStorage.getItem(currentFormatKey);
+  useEffect(() => {
+    const preRecordString = localStorage.getItem(`${numOfColumns * numOfRows}tiles${mineRatio}mineRatio`);
+    setRecord(preRecordString ? Number(preRecordString) : null);
+  }, [mineRatio, numOfColumns, numOfRows]);
 
   useEffect(() => {
     // Ironman/instalose mode
-    if (status === "during" && recordTime && settings.instalose && timeElapsed > Number(recordTime)) {
+    if (status === "during" && record && settings.instalose && timeElapsed > record) {
       alert("Out of time!");
       return setGameState({ ...gameState, status: "lost" });
     }
@@ -29,24 +35,11 @@ export default function Timer() {
     }
 
     // Code for setting records
-    if (status === "won") {
-      if (!recordTime || timeElapsed < Number(recordTime)) {
-        const { label } = Object.values(difficultiesDict).find((d) => d.mineRatio === mineRatio)!;
-        const { w, h } = Object.values(sizesDict).find((s) => s.w === numOfColumns)!;
-
-        alert(`New record!
-        ${w}x${h} at ${label} difficulty
-        ${recordTime ? `Prev record: ${recordTime}s` : ""}
-        `);
-
-        localStorage.setItem(currentFormatKey, timeElapsed.toString());
-        // setOldAndNewRecords({
-        //   old: prevRecordTime ? Number(prevRecordTime) : undefined,
-        //   new: timeElapsed,
-        // });
-        // setNewRecordOpen(true);
-        // setCurrentRecord(timeElapsed);
-      }
+    if (status === "won" && (!record || timeElapsed < record)) {
+      setPrevRecord(record);
+      setRecord(timeElapsed);
+      setRecordModalShown(true);
+      localStorage.setItem(`${numOfColumns * numOfRows}tiles${mineRatio}mineRatio`, timeElapsed.toString());
     }
   }, [status, timeElapsed]);
 
@@ -59,8 +52,9 @@ export default function Timer() {
 
   return (
     <div className={styles.counter}>
+      <RecordModal shown={recordModalShown} setShown={setRecordModalShown} record={record} oldRecord={prevRecord} />
       {status !== "pre" && <img src="/images/watch.webp" />}
-      <span>{status === "pre" ? (recordTime ? `Best: ${recordTime}s` : "No best time") : timeElapsed.toFixed(1) + "s"}</span>
+      <span>{status === "pre" ? (record ? `Best: ${record}s` : "No best time") : timeElapsed.toFixed(1) + "s"}</span>
     </div>
   );
 }

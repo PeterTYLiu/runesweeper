@@ -10,7 +10,7 @@ import generateTiles from "../../utils/generateTiles";
 
 export default function Header() {
   const [settingsModalShown, setSettingsModalShown] = useState(false);
-  const [aboutModalShown, setAboutModalShown] = useState(false);
+  const [aboutModalShown, setAboutModalShown] = useState(localStorage.getItem("showAboutModal") ? false : true);
   const { gameState, setGameState } = useGameStateContext();
   const { settings } = useSettingsContext();
 

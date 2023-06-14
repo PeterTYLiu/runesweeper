@@ -5,8 +5,10 @@ export default function AboutModal({ shown, setShown }: { shown: boolean; setSho
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   useEffect(() => {
-    if (shown) dialogRef.current?.showModal();
-    else dialogRef.current?.close();
+    if (shown) {
+      dialogRef.current?.removeAttribute("open");
+      dialogRef.current?.showModal();
+    } else dialogRef.current?.close();
   }, [shown]);
 
   return (
