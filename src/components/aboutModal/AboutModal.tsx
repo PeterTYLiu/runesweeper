@@ -15,7 +15,7 @@ export default function AboutModal({ shown, setShown }: { shown: boolean; setSho
     <dialog ref={dialogRef} className={styles.dialog}>
       <header>
         <p>Welcome to</p>
-        <h1>RuneSweeper</h1>
+        <h1>RuneSweeper (WIP)</h1>
       </header>
       <button
         onClick={() => {
@@ -25,7 +25,9 @@ export default function AboutModal({ shown, setShown }: { shown: boolean; setSho
       >
         Play
       </button>
-      <p>Github repo</p>
+      <p>
+        <a href="https://github.com/PeterTYLiu/runesweeper">Github repo</a>
+      </p>
     </dialog>
   );
 }

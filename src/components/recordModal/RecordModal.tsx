@@ -19,8 +19,8 @@ export default function RecordModal({
 
   const { numOfColumns, mineRatio } = settings;
 
-  const { label } = Object.values(difficultiesDict).find((d) => d.mineRatio === mineRatio)!;
-  const { w, h } = Object.values(sizesDict).find((s) => s.w === numOfColumns)!;
+  const difficulty = Object.values(difficultiesDict).find((d) => d.mineRatio === mineRatio)!;
+  const size = Object.values(sizesDict).find((s) => s.w === numOfColumns)!;
 
   useEffect(() => {
     if (shown) dialogRef.current?.showModal();
@@ -31,7 +31,7 @@ export default function RecordModal({
     <dialog ref={dialogRef} className={styles.dialog}>
       <h1>New record!</h1>
       <p>
-        Best time for {w}x{h} at {label} difficulty
+        Best time for {size?.w}x{size?.h} at {difficulty?.label} difficulty
       </p>
       <h2>{record}s</h2>
       {!!oldRecord && (

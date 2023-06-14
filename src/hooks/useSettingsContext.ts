@@ -18,8 +18,8 @@ interface SettingsContextType {
 }
 
 export const defaultSettings: Settings = {
-  numOfColumns: sizesDict.m.h,
-  numOfRows: sizesDict.m.w,
+  numOfColumns: sizesDict.m.w,
+  numOfRows: sizesDict.m.h,
   mineRatio: difficultiesDict.medium.mineRatio,
   swipeToChord: true,
   swipeToFlag: true,
