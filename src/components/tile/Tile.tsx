@@ -5,6 +5,8 @@ import styles from "./Tile.module.scss";
 import chord from "../../utils/chord";
 import floodFill from "../../utils/floodFill";
 
+type FlagStatus = "flagged" | "maybe" | "unflagged";
+
 export interface TileType {
   isMine: boolean;
   minesAround: number;
@@ -12,11 +14,15 @@ export interface TileType {
   id: number;
   c: number;
   r: number;
-  flagStatus: "flagged" | "maybe" | "unflagged";
+  flagStatus: FlagStatus;
 }
 
 interface TileProps {
   tile: TileType;
+}
+
+function cycleFlagStatus(currentStatus: FlagStatus, allowMaybe: boolean): FlagStatus {
+  return currentStatus === "unflagged" ? (allowMaybe ? "maybe" : "flagged") : currentStatus === "maybe" ? "flagged" : "unflagged";
 }
 
 const maybe = <img src="./images/maybe.png" />;
@@ -36,7 +42,7 @@ export default function Tile({ tile }: TileProps) {
       if (settings.swipeToChord && swept && !isMine && minesAround) setGameState(chord(tile, gameState));
       else if (settings.swipeToFlag && !swept) {
         const newTiles = [...gameState.tiles];
-        newTiles[id - 1].flagStatus = flagStatus === "flagged" ? "unflagged" : "flagged";
+        newTiles[id - 1].flagStatus = cycleFlagStatus(flagStatus, settings.allowMaybe);
         setGameState({ ...gameState, tiles: newTiles });
       }
     },
@@ -46,11 +52,10 @@ export default function Tile({ tile }: TileProps) {
 
   // Event handlers
 
-  const handleContextMenu = (e: any) => {
+  const handleContextMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!swept && e.button === 2) {
       const newTiles = [...tiles];
-      newTiles[id - 1].flagStatus =
-        flagStatus === "unflagged" ? (settings.allowMaybe ? "maybe" : "flagged") : flagStatus === "maybe" ? "flagged" : "unflagged";
+      newTiles[id - 1].flagStatus = cycleFlagStatus(flagStatus, settings.allowMaybe);
       return setGameState({ ...gameState, tiles: newTiles });
     }
     if (swept && !isMine && minesAround) setGameState(chord(tile, gameState));
@@ -79,8 +84,7 @@ export default function Tile({ tile }: TileProps) {
     // This handles long-press on mobile
     const flagThisTile = setTimeout(() => {
       const newTiles = [...tiles];
-      newTiles[id - 1].flagStatus =
-        flagStatus === "unflagged" ? (settings.allowMaybe ? "maybe" : "flagged") : flagStatus === "maybe" ? "flagged" : "unflagged";
+      newTiles[id - 1].flagStatus = cycleFlagStatus(flagStatus, settings.allowMaybe);
       return setGameState({ ...gameState, tiles: newTiles });
     }, 800);
     e.target.addEventListener("touchend", () => {
