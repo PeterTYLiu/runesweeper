@@ -23,7 +23,13 @@ export default function AboutModal({ shown, setShown }: { shown: boolean; setSho
       </section>
       <section>
         <video src="./videos/chord.mp4" autoPlay disablePictureInPicture loop muted />
-        <h2>Right-click or double-click on a number tile to chord it</h2>
+        <h2>
+          Right-click or double-click on a number tile to{" "}
+          <a href="https://en.wikipedia.org/wiki/Chording#Minesweeper_tactic" target="_blank">
+            chord
+          </a>{" "}
+          it
+        </h2>
       </section>
       <section>
         <h2>On mobile, you can long-press or swipe instead of double-clicking or right-clicking.</h2>

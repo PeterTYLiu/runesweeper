@@ -75,6 +75,12 @@ function App() {
         <main className={styles.main}>
           <Header />
           <div className={styles.board}>{gameState.status === "pre" ? pregameTiles : gameTiles}</div>
+          <p className={styles.credits}>
+            Made by Peter Liu&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="https://github.com/PeterTYLiu/runesweeper" target="_blank">
+              Github
+            </a>
+          </p>
         </main>
       </GameStateContext.Provider>
     </SettingsContext.Provider>

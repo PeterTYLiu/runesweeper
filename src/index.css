@@ -35,11 +35,12 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #ed9b40;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #ffab4a;
+  cursor: pointer;
 }
 
 dialog {
