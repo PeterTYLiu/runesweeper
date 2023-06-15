@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useGameStateContext } from "../../hooks/useGameStateContext";
 import { useSettingsContext } from "../../hooks/useSettingsContext";
 import RecordModal from "../recordModal/RecordModal";
+import InstaloseToast from "../instaloseToast/InstaloseToast";
 import styles from "../../styles/counter.module.scss";
 
 export default function Timer() {
@@ -9,11 +10,12 @@ export default function Timer() {
   const { settings } = useSettingsContext();
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [recordModalShown, setRecordModalShown] = useState(false);
+  const [instaloseModalOpen, setInstaloseModalOpen] = useState(false);
   const [record, setRecord] = useState<number | null>(null);
   const [prevRecord, setPrevRecord] = useState<number | null>(null);
 
   const { status } = gameState;
-  const { numOfColumns, numOfRows, mineRatio } = settings;
+  const { numOfColumns, numOfRows, mineRatio, instalose } = settings;
 
   useEffect(() => {
     const preRecordString = localStorage.getItem(`${numOfColumns * numOfRows}tiles${mineRatio}mineRatio`);
@@ -22,8 +24,11 @@ export default function Timer() {
 
   useEffect(() => {
     // Ironman/instalose mode
-    if (status === "during" && record && settings.instalose && timeElapsed > record) {
-      alert("Out of time!");
+    if (status === "during" && record && instalose && timeElapsed > record) {
+      setInstaloseModalOpen(true);
+      setTimeout(() => {
+        setInstaloseModalOpen(false);
+      }, 2475); // Make sure this interval is in sync with the animation duration in instaloseToast.module.scss
       return setGameState({ ...gameState, status: "lost" });
     }
     if (status === "during") {
@@ -52,6 +57,7 @@ export default function Timer() {
   return (
     <div className={styles.counter}>
       <RecordModal shown={recordModalShown} setShown={setRecordModalShown} record={record} oldRecord={prevRecord} />
+      <InstaloseToast open={instaloseModalOpen} />
       {status !== "pre" && <img src="./images/watch.webp" />}
       <span>{status === "pre" ? (record ? `Best: ${record}s` : "No best time") : timeElapsed.toFixed(1) + "s"}</span>
     </div>
