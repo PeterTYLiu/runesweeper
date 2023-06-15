@@ -36,7 +36,7 @@ export default function SettingsModal({ shown, setShown }: { shown: boolean; set
       <header>
         <h1>Settings</h1>
         <button onClick={() => setShown(false)} className="icon">
-          <img src="/images/close.png" />
+          <img src="./images/close.png" />
         </button>
       </header>
       <section>

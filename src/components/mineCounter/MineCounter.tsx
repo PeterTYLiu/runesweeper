@@ -12,7 +12,7 @@ export default function MineCounter() {
   return (
     <div className={styles.counter}>
       <span>{numOfMines - numOfFlags}</span>
-      <img src="/images/mine.png" />
+      <img src="./images/mine.png" />
     </div>
   );
 }

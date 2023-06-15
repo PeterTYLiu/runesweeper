@@ -90,6 +90,7 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   background-image: linear-gradient(#ffffff48, #ffffff49), url("/images/button-bg.png");
+  overscroll-behavior: none;
 }
 
 h1 {

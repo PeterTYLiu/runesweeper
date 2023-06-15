@@ -19,11 +19,11 @@ interface TileProps {
   tile: TileType;
 }
 
-const maybe = <img src="/images/maybe.png" />;
-const flagged = <img className={styles.flag} src="/images/flag.png" />;
-const falseFlagged = <img src="/images/falseFlag.png" />;
-const mine = <img src="/images/mine.png" />;
-const clearedMine = <img src="/images/clearedMine.png" />;
+const maybe = <img src="./images/maybe.png" />;
+const flagged = <img className={styles.flag} src="./images/flag.png" />;
+const falseFlagged = <img src="./images/falseFlag.png" />;
+const mine = <img src="./images/mine.png" />;
+const clearedMine = <img src="./images/clearedMine.png" />;
 
 export default function Tile({ tile }: TileProps) {
   const { swept, isMine, minesAround, flagStatus, id, c, r } = tile;

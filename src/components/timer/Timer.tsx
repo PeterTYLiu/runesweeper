@@ -52,7 +52,7 @@ export default function Timer() {
   return (
     <div className={styles.counter}>
       <RecordModal shown={recordModalShown} setShown={setRecordModalShown} record={record} oldRecord={prevRecord} />
-      {status !== "pre" && <img src="/images/watch.webp" />}
+      {status !== "pre" && <img src="./images/watch.webp" />}
       <span>{status === "pre" ? (record ? `Best: ${record}s` : "No best time") : timeElapsed.toFixed(1) + "s"}</span>
     </div>
   );

@@ -32,7 +32,7 @@ export default function Header() {
       </div>
       {(status === "won" || status === "lost") && (
         <button className={styles.main} onClick={reset}>
-          <img src="/images/hometele.webp" />
+          <img src="./images/hometele.webp" />
         </button>
       )}
       <div className={styles.right}>
@@ -41,10 +41,10 @@ export default function Header() {
         ) : (
           <>
             <button onClick={() => setAboutModalShown(true)}>
-              <img src="/images/info.png" />
+              <img src="./images/info.png" />
             </button>
             <button onClick={() => setSettingsModalShown(true)}>
-              <img src="/images/settings.png" />
+              <img src="./images/settings.png" />
             </button>
           </>
         )}
