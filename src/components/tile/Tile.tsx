@@ -76,9 +76,11 @@ export default function Tile({ tile }: TileProps) {
     if (!e.target) return;
     highlightTilesToChord();
     if (swept) return;
+    // This handles long-press on mobile
     const flagThisTile = setTimeout(() => {
       const newTiles = [...tiles];
-      newTiles[id - 1].flagStatus = flagStatus === "unflagged" ? (settings.allowMaybe ? "maybe" : "flagged") : "unflagged";
+      newTiles[id - 1].flagStatus =
+        flagStatus === "unflagged" ? (settings.allowMaybe ? "maybe" : "flagged") : flagStatus === "maybe" ? "flagged" : "unflagged";
       return setGameState({ ...gameState, tiles: newTiles });
     }, 800);
     e.target.addEventListener("touchend", () => {
