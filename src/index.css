@@ -66,6 +66,7 @@ button {
   padding: 5px 7px;
   font-size: 16px;
   user-select: none;
+  -webkit-user-select: none;
   box-shadow: inset 0px 2px #ffffff20, inset 0px -2px #00000040, inset -2px 0px #00000030, inset 2px 0px #ffffff10;
 }
 button > span {
