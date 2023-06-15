@@ -29,17 +29,23 @@ export default function RecordModal({
 
   return (
     <dialog ref={dialogRef} className={styles.dialog}>
-      <h1>New record!</h1>
+      <header>
+        <img src="./images/phat-green.png" />
+        <h2>New record!</h2>
+        <img src="./images/phat-purple.png" />
+      </header>
       <p>
         Best time for {size?.w}x{size?.h} at {difficulty?.label} difficulty
       </p>
-      <h2>{record}s</h2>
+      <h1>{record}s</h1>
       {!!oldRecord && (
         <p>
           Previous record: <strong>{oldRecord}s</strong>
         </p>
       )}
-      <button onClick={() => setShown(false)}>Wonderflu!</button>
+      <button className={styles.done} onClick={() => setShown(false)}>
+        Wonderful!
+      </button>
     </dialog>
   );
 }
