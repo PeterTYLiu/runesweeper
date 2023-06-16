@@ -19,7 +19,7 @@
     background-image: url("/images/bg-light.png");
     box-shadow: none;
   }
-  &.mine.trigger {
+  &.mine.swept {
     background-image: url("/images/bg-trigger.png");
   }
   &:not(.swept):hover,

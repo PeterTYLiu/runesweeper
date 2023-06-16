@@ -38,7 +38,10 @@ export default function chord(triggerTile: TileType, gameState: GameState): Game
   const triggeredMines = tilesToSweep.filter((tile) => tile && tile.isMine) as TileType[];
   const triggeredMinesIds = triggeredMines.map((tm) => tm.id);
 
-  if (triggeredMinesIds.length) return { ...gameState, status: "lost", triggeredMinesIds: triggeredMinesIds };
+  if (triggeredMinesIds.length) {
+    triggeredMines.forEach((m) => (m.swept = true));
+    return { ...gameState, status: "lost" };
+  }
 
   tilesToSweep.forEach((tile) => {
     if (!tile) return;

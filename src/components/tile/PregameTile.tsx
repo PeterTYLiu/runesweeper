@@ -21,7 +21,7 @@ export default function PregameTile({ id }: { id: number }) {
     newTiles[id - 1].swept = true;
     floodFill(newTiles[id - 1], newTiles);
 
-    setGameState({ tiles: newTiles, status: "during", triggeredMinesIds: [] });
+    setGameState({ tiles: newTiles, status: "during" });
   }
 
   return <button className={styles.tile} onClick={startGame} />;

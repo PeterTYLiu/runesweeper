@@ -7,7 +7,7 @@ import Tile from "./components/tile/Tile";
 import PregameTile from "./components/tile/PregameTile";
 import Header from "./components/header/Header";
 
-const version = "1.0.2";
+const version = "1.0.3";
 
 function App() {
   const settingsOnLoad: Settings = { ...defaultSettings };
@@ -17,7 +17,7 @@ function App() {
   });
 
   const [settings, setSettings] = useState<Settings>(settingsOnLoad);
-  const [gameState, setGameState] = useState<GameState>({ tiles: [], status: "pre", triggeredMinesIds: [] });
+  const [gameState, setGameState] = useState<GameState>({ tiles: [], status: "pre" });
 
   const { numOfColumns, numOfRows, mineRatio, isLandscape } = settings;
   const { tiles, status } = gameState;
@@ -27,7 +27,6 @@ function App() {
     setGameState({
       tiles: generateTiles(numOfColumns, numOfRows, mineRatio, isLandscape),
       status: "pre",
-      triggeredMinesIds: [],
     });
   }, [numOfColumns, numOfRows, isLandscape]);
 

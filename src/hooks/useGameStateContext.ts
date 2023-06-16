@@ -6,7 +6,6 @@ export type Status = "pre" | "during" | "won" | "lost";
 export interface GameState {
   tiles: TileType[];
   status: Status;
-  triggeredMinesIds: number[];
 }
 
 interface GameStateContextType {
@@ -15,7 +14,7 @@ interface GameStateContextType {
 }
 
 const defaultValue: GameStateContextType = {
-  gameState: { tiles: [], status: "pre", triggeredMinesIds: [] },
+  gameState: { tiles: [], status: "pre" },
   setGameState: () => {},
 };
 

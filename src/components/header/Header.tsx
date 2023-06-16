@@ -21,7 +21,6 @@ export default function Header() {
     setGameState({
       tiles: generateTiles(settings.numOfColumns, settings.numOfRows, settings.mineRatio, settings.isLandscape),
       status: "pre",
-      triggeredMinesIds: [],
     });
   }
 

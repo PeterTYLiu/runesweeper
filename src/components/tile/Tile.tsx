@@ -48,7 +48,7 @@ export default function Tile({ tile }: TileProps) {
     },
   });
 
-  const { status, tiles, triggeredMinesIds } = gameState;
+  const { status, tiles } = gameState;
 
   // Event handlers
 
@@ -69,7 +69,7 @@ export default function Tile({ tile }: TileProps) {
     // If it is a mine
     if (flagStatus !== "flagged" && isMine) {
       return setGameState((prevState) => {
-        const newGameState: GameState = { ...prevState, status: "lost", triggeredMinesIds: [id] };
+        const newGameState: GameState = { ...prevState, status: "lost" };
         newGameState.tiles[id - 1].swept = true;
         return newGameState;
       });
@@ -162,9 +162,7 @@ export default function Tile({ tile }: TileProps) {
       onMouseLeave={unhighlightTilesToChord}
       onDoubleClick={handleDoubleClick}
       {...swipeHandler}
-      className={`${styles.tile} ${isMine ? styles.mine : ""} ${swept ? styles.swept : ""} ${styles[`is-${minesAround}`]} ${
-        triggeredMinesIds.includes(id) ? styles.trigger : ""
-      } id-${id}`}
+      className={`${styles.tile} ${isMine ? styles.mine : ""} ${swept ? styles.swept : ""} ${styles[`is-${minesAround}`]} id-${id}`}
       onContextMenu={(e) => {
         e.preventDefault();
         handleContextMenu(e);
