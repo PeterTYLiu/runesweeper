@@ -1,4 +1,4 @@
-import { createContext, useContext, type Dispatch } from "react";
+import { createContext, useContext, type Dispatch, type SetStateAction } from "react";
 import { sizesDict, difficultiesDict } from "../utils/settings";
 
 export interface Settings {
@@ -14,7 +14,7 @@ export interface Settings {
 
 interface SettingsContextType {
   settings: Settings;
-  setSettings: Dispatch<Settings>;
+  setSettings: Dispatch<SetStateAction<Settings>>;
 }
 
 export const defaultSettings: Settings = {

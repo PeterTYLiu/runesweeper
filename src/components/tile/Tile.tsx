@@ -1,5 +1,5 @@
 import { useSwipeable } from "react-swipeable";
-import { useGameStateContext } from "../../hooks/useGameStateContext";
+import { GameState, useGameStateContext } from "../../hooks/useGameStateContext";
 import { useSettingsContext } from "../../hooks/useSettingsContext";
 import styles from "./Tile.module.scss";
 import chord from "../../utils/chord";
@@ -66,16 +66,23 @@ export default function Tile({ tile }: TileProps) {
   };
 
   const handleClick = () => {
-    const newTiles = [...tiles];
+    // If it is a mine
     if (flagStatus !== "flagged" && isMine) {
-      newTiles[id - 1].swept = true;
-      return setGameState({ tiles: newTiles, status: "lost", triggeredMinesIds: [id] });
+      return setGameState((prevState: GameState) => {
+        const newGameState: GameState = { ...prevState, status: "lost", triggeredMinesIds: [id] };
+        newGameState.tiles[id - 1].swept = true;
+        return newGameState;
+      });
     }
+    // If it is safe
     if (flagStatus !== "flagged" && !swept) {
-      newTiles[id - 1].swept = true;
-      newTiles[id - 1].flagStatus = "unflagged";
-      if (minesAround === 0 && !isMine) floodFill(newTiles[id - 1], newTiles);
-      setGameState({ ...gameState, tiles: newTiles });
+      setGameState((prevState: GameState) => {
+        const newGameState: GameState = { ...prevState, status: "lost", triggeredMinesIds: [id] };
+        newGameState.tiles[id - 1].swept = true;
+        newGameState.tiles[id - 1].flagStatus = "unflagged";
+        if (minesAround === 0 && !isMine) floodFill(newGameState.tiles[id - 1], newGameState.tiles);
+        return newGameState;
+      });
     }
   };
 

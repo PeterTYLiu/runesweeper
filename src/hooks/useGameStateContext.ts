@@ -1,4 +1,4 @@
-import { createContext, useContext, type Dispatch } from "react";
+import { createContext, useContext, type Dispatch, type SetStateAction } from "react";
 import { TileType } from "../components/tile/Tile";
 
 export type Status = "pre" | "during" | "won" | "lost";
@@ -11,7 +11,7 @@ export interface GameState {
 
 interface GameStateContextType {
   gameState: GameState;
-  setGameState: Dispatch<GameState>;
+  setGameState: Dispatch<SetStateAction<GameState>>;
 }
 
 const defaultValue: GameStateContextType = {
