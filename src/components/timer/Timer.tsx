@@ -18,13 +18,13 @@ export default function Timer() {
   const { numOfColumns, numOfRows, mineRatio, instalose } = settings;
 
   useEffect(() => {
-    const preRecordString = localStorage.getItem(`${numOfColumns * numOfRows}tiles${mineRatio}mineRatio`);
-    setRecord(preRecordString ? Number(preRecordString) : null);
+    const prevRecordString = localStorage.getItem(`${numOfColumns * numOfRows}tiles${mineRatio}mineRatio`);
+    setRecord(prevRecordString ? Number(prevRecordString) : null);
   }, [mineRatio, numOfColumns, numOfRows]);
 
   useEffect(() => {
     // Ironman/instalose mode
-    if (status === "during" && record && instalose && timeElapsed > record) {
+    if (status === "during" && typeof record === "number" && instalose && timeElapsed > record) {
       setInstaloseModalOpen(true);
       setTimeout(() => {
         setInstaloseModalOpen(false);
@@ -33,13 +33,13 @@ export default function Timer() {
     }
     if (status === "during") {
       const timer = setInterval(() => {
-        setTimeElapsed(Number((timeElapsed + 0.1).toFixed(1)));
+        setTimeElapsed(Number((timeElapsed + 0.1).toFixed(1))); // Prevents JS floating-point arithmetic issues
       }, 100);
       return () => clearInterval(timer);
     }
 
     // Code for setting records
-    if (status === "won" && (!record || timeElapsed < record)) {
+    if (status === "won" && (typeof record !== "number" || timeElapsed < record)) {
       setPrevRecord(record);
       setRecord(timeElapsed);
       setRecordModalShown(true);
@@ -49,9 +49,7 @@ export default function Timer() {
 
   // Reset the time between games
   useEffect(() => {
-    if (status === "pre") {
-      setTimeElapsed(0);
-    }
+    if (status === "pre") setTimeElapsed(0);
   }, [status]);
 
   return (

@@ -38,7 +38,7 @@ export default function RecordModal({
         Best time for {size?.w}x{size?.h} at {difficulty?.label} difficulty
       </p>
       <h1>{record}s</h1>
-      {!!oldRecord && (
+      {typeof oldRecord === "number" && (
         <p>
           Previous record: <strong>{oldRecord}s</strong>
         </p>

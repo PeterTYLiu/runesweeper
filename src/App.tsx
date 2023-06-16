@@ -15,38 +15,37 @@ function App() {
   });
 
   const [settings, setSettings] = useState<Settings>(settingsOnLoad);
-  const [gameState, setGameState] = useState<GameState>({
-    tiles: generateTiles(settings.numOfColumns, settings.numOfRows, settings.mineRatio, settings.isLandscape),
-    status: "pre",
-    triggeredMinesIds: [],
-  });
+  const [gameState, setGameState] = useState<GameState>({ tiles: [], status: "pre", triggeredMinesIds: [] });
 
-  // Update board when settings change
+  const { numOfColumns, numOfRows, mineRatio, isLandscape } = settings;
+  const { tiles, status } = gameState;
+
+  // Update board when certain settings change
   useEffect(() => {
     setGameState({
-      tiles: generateTiles(settings.numOfColumns, settings.numOfRows, settings.mineRatio, settings.isLandscape),
+      tiles: generateTiles(numOfColumns, numOfRows, mineRatio, isLandscape),
       status: "pre",
       triggeredMinesIds: [],
     });
-  }, [settings]);
+  }, [numOfColumns, numOfRows, isLandscape]);
 
-  // Checks if you've done something to win or lose, if you haven't already won or lost
+  // Checks if you've done something to win, if you haven't already won or lost.
+  // Losing is triggered elsewhere.
   useEffect(() => {
-    if (gameState.status !== "during") return;
-    const numOfSweptNonMines = gameState.tiles.filter((t) => t.swept && !t.isMine).length;
-    const numOfNonMines = gameState.tiles.filter((t) => !t.isMine).length;
+    if (status !== "during") return;
+    const numOfSweptNonMines = tiles.filter((t) => t.swept && !t.isMine).length;
+    const numOfNonMines = tiles.filter((t) => !t.isMine).length;
     if (numOfNonMines === numOfSweptNonMines) setGameState({ ...gameState, status: "won" });
-    if (gameState.tiles.find((t) => t.isMine && t.swept)) setGameState({ ...gameState, status: "lost" });
   }, [gameState]);
 
   // The depending on which pre-game tile the user clicks, we generate a board such that
   // the tile they clicked triggers a cascade.
-  const pregameTiles = gameState.tiles
+  const pregameTiles = tiles
     .filter((t) => t.c === 1)
     .map((_tile, index) => {
       return (
         <div key={index} className={styles.row}>
-          {gameState.tiles
+          {tiles
             .filter((t) => t.r === index + 1)
             .map((innerTile) => (
               <PregameTile id={innerTile.id} key={innerTile.id} />
@@ -55,12 +54,12 @@ function App() {
       );
     });
 
-  const gameTiles = gameState.tiles
+  const gameTiles = tiles
     .filter((t) => t.c === 1)
     .map((_tile, index) => {
       return (
         <div key={index} className={styles.row}>
-          {gameState.tiles
+          {tiles
             .filter((t) => t.r === index + 1)
             .map((innerTile) => (
               <Tile tile={innerTile} key={innerTile.id} />
@@ -74,9 +73,9 @@ function App() {
       <GameStateContext.Provider value={{ gameState, setGameState }}>
         <main className={styles.main}>
           <Header />
-          <div className={styles.board}>{gameState.status === "pre" ? pregameTiles : gameTiles}</div>
+          <div className={styles.board}>{status === "pre" ? pregameTiles : gameTiles}</div>
           <p className={styles.credits}>
-            Made by Peter Liu&nbsp;&nbsp;|&nbsp;&nbsp;
+            Made by Peter Liu&nbsp;&nbsp;|&nbsp;&nbsp;v1.0.1&nbsp;&nbsp;|&nbsp;&nbsp;
             <a href="https://github.com/PeterTYLiu/runesweeper" target="_blank">
               Github
             </a>
