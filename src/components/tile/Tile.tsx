@@ -68,7 +68,7 @@ export default function Tile({ tile }: TileProps) {
   const handleClick = () => {
     // If it is a mine
     if (flagStatus !== "flagged" && isMine) {
-      return setGameState((prevState: GameState) => {
+      return setGameState((prevState) => {
         const newGameState: GameState = { ...prevState, status: "lost", triggeredMinesIds: [id] };
         newGameState.tiles[id - 1].swept = true;
         return newGameState;
@@ -76,8 +76,8 @@ export default function Tile({ tile }: TileProps) {
     }
     // If it is safe
     if (flagStatus !== "flagged" && !swept) {
-      setGameState((prevState: GameState) => {
-        const newGameState: GameState = { ...prevState, status: "lost", triggeredMinesIds: [id] };
+      setGameState((prevState) => {
+        const newGameState: GameState = { ...prevState };
         newGameState.tiles[id - 1].swept = true;
         newGameState.tiles[id - 1].flagStatus = "unflagged";
         if (minesAround === 0 && !isMine) floodFill(newGameState.tiles[id - 1], newGameState.tiles);
