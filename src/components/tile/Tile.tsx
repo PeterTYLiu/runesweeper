@@ -67,11 +67,13 @@ export default function Tile({ tile }: TileProps) {
 
   const handleClick = () => {
     const newTiles = [...tiles];
-    newTiles[id - 1].swept = true;
-    if ((flagStatus === "unflagged" || flagStatus === "maybe") && isMine) {
+    if (flagStatus !== "flagged" && isMine) {
+      newTiles[id - 1].swept = true;
       return setGameState({ tiles: newTiles, status: "lost", triggeredMinesIds: [id] });
     }
-    if (flagStatus === "unflagged" && !swept) {
+    if (flagStatus !== "flagged" && !swept) {
+      newTiles[id - 1].swept = true;
+      newTiles[id - 1].flagStatus = "unflagged";
       if (minesAround === 0 && !isMine) floodFill(newTiles[id - 1], newTiles);
       setGameState({ ...gameState, tiles: newTiles });
     }
@@ -107,15 +109,15 @@ export default function Tile({ tile }: TileProps) {
         .filter((tile) => !tile?.swept && tile?.flagStatus !== "flagged")
         .map((tile) => tile?.id);
       chordableTilesIds.forEach((id) => {
-        document.querySelector(`.id-${id}`)?.classList.add(styles.hightlight);
+        document.querySelector(`.id-${id}`)?.classList.add(styles.highlight);
       });
     }
   };
 
   const unhighlightTilesToChord = () => {
     if (swept && minesAround && !isMine) {
-      const highlightedTiles = document.querySelectorAll(`.${styles.hightlight}`);
-      highlightedTiles.forEach((tile) => tile.classList.remove(styles.hightlight));
+      const highlightedTiles = document.querySelectorAll(`.${styles.highlight}`);
+      highlightedTiles.forEach((tile) => tile.classList.remove(styles.highlight));
     }
   };
 

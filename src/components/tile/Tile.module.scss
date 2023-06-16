@@ -23,7 +23,7 @@
     background-image: url("/images/bg-trigger.png");
   }
   &:not(.swept):hover,
-  &.hightlight {
+  &.highlight {
     background-image: linear-gradient(#ffffff20, #ffffff20), url("/images/bg-dark.png");
   }
   > * {
