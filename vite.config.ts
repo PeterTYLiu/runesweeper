@@ -9,7 +9,7 @@ export default defineConfig({
 
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "icon-192.png", "icon-512.png"],
+      includeAssets: ["**/*"],
 
       manifest: {
         name: "RuneSweeper",

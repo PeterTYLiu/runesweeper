@@ -7,7 +7,7 @@ import Tile from "./components/tile/Tile";
 import PregameTile from "./components/tile/PregameTile";
 import Header from "./components/header/Header";
 
-const version = "1.0.3";
+const version = "1.0.4";
 
 function App() {
   const settingsOnLoad: Settings = { ...defaultSettings };
