@@ -7,7 +7,7 @@ import Tile from "./components/tile/Tile";
 import PregameTile from "./components/tile/PregameTile";
 import Header from "./components/header/Header";
 
-const version = "1.0.4";
+const version = "1.0.5";
 
 function App() {
   const settingsOnLoad: Settings = { ...defaultSettings };
@@ -76,7 +76,7 @@ function App() {
           <Header />
           <div className={styles.board}>{status === "pre" ? pregameTiles : gameTiles}</div>
           <p className={styles.credits}>
-            Made by Peter Liu&nbsp;&nbsp;|&nbsp;&nbsp;{version}&nbsp;&nbsp;|&nbsp;&nbsp;
+            Made by Peter Liu&nbsp;&nbsp;|&nbsp;&nbsp;v{version}&nbsp;&nbsp;|&nbsp;&nbsp;
             <a href="https://github.com/PeterTYLiu/runesweeper" target="_blank">
               Github
             </a>

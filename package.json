@@ -13,19 +13,19 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-swipeable": "^7.0.1",
-    "sass": "^1.63.4"
+    "sass": "^1.63.6"
   },
   "devDependencies": {
-    "@types/react": "^18.2.12",
-    "@types/react-dom": "^18.2.5",
-    "@typescript-eslint/eslint-plugin": "^5.59.11",
-    "@typescript-eslint/parser": "^5.59.11",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
     "@vitejs/plugin-react-swc": "^3.0.0",
-    "eslint": "^8.38.0",
+    "eslint": "^8.44.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.3.5",
-    "typescript": "^5.0.2",
-    "vite": "^4.3.9",
+    "eslint-plugin-react-refresh": "^0.4.1",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.1",
     "vite-plugin-pwa": "^0.16.4"
   }
 }
