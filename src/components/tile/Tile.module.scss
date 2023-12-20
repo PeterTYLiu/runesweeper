@@ -5,11 +5,11 @@
   -webkit-user-select: none;
   display: grid;
   place-items: center;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: bold;
   text-shadow: none;
-  height: 40px;
-  width: 40px;
+  height: 36px;
+  width: 36px;
   flex-grow: 0;
   flex-shrink: 0;
   background-image: url("/images/bg-dark.png");
@@ -25,6 +25,10 @@
   &:not(.swept):hover,
   &.highlight {
     background-image: linear-gradient(#ffffff20, #ffffff20), url("/images/bg-dark.png");
+  }
+  > img {
+    width: 26px;
+    height: 26px;
   }
   > * {
     margin: 0;
