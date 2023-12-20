@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { defaultSettings, SettingsContext, type Settings } from "./hooks/useSettingsContext";
 import { GameStateContext, type GameState } from "./hooks/useGameStateContext";
+import confetti from "canvas-confetti";
 import styles from "./App.module.scss";
 import generateTiles from "./utils/generateTiles";
 import Tile from "./components/tile/Tile";
 import PregameTile from "./components/tile/PregameTile";
 import Header from "./components/header/Header";
 
-const version = "1.0.5";
+const version = "1.0.6";
 
 function App() {
   const settingsOnLoad: Settings = { ...defaultSettings };
@@ -36,7 +37,10 @@ function App() {
     if (status !== "during") return;
     const numOfSweptNonMines = tiles.filter((t) => t.swept && !t.isMine).length;
     const numOfNonMines = tiles.filter((t) => !t.isMine).length;
-    if (numOfNonMines === numOfSweptNonMines) setGameState({ ...gameState, status: "won" });
+    if (numOfNonMines === numOfSweptNonMines) {
+      confetti({ startVelocity: 30, gravity: 2, spread: 140, origin: { y: 0.3 } });
+      setGameState({ ...gameState, status: "won" });
+    }
   }, [gameState]);
 
   // The depending on which pre-game tile the user clicks, we generate a board such that
