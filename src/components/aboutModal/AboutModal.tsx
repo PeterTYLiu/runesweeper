@@ -1,5 +1,5 @@
 import { useRef, useEffect, type Dispatch } from "react";
-import styles from "./AboutModal.module.scss";
+import styles from "./AboutModal.module.css";
 
 export default function AboutModal({ shown, setShown }: { shown: boolean; setShown: Dispatch<boolean> }) {
   const dialogRef = useRef<HTMLDialogElement | null>(null);

@@ -1,4 +1,4 @@
-import styles from "./InstaloseToast.module.scss";
+import styles from "./InstaloseToast.module.css";
 
 export default function InstaloseToast({ open }: { open: boolean }) {
   return (

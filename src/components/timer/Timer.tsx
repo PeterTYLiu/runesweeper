@@ -3,7 +3,7 @@ import { useGameStateContext } from "../../hooks/useGameStateContext";
 import { useSettingsContext } from "../../hooks/useSettingsContext";
 import RecordModal from "../recordModal/RecordModal";
 import InstaloseToast from "../instaloseToast/InstaloseToast";
-import styles from "../../styles/counter.module.scss";
+import styles from "../../styles/counter.module.css";
 
 export default function Timer() {
   const { gameState, setGameState } = useGameStateContext();

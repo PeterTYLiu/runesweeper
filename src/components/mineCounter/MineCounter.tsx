@@ -1,5 +1,5 @@
 import { useGameStateContext } from "../../hooks/useGameStateContext";
-import styles from "../../styles/counter.module.scss";
+import styles from "../../styles/counter.module.css";
 
 export default function MineCounter() {
   const { gameState } = useGameStateContext();

@@ -1,5 +1,5 @@
 import { useRef, useEffect, type Dispatch } from "react";
-import styles from "./RecordModal.module.scss";
+import styles from "./RecordModal.module.css";
 import { useSettingsContext } from "../../hooks/useSettingsContext";
 import { difficultiesDict, sizesDict } from "../../utils/settings";
 

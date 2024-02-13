@@ -1,4 +1,4 @@
-// A shared module for the timer and the mine counter
+/* A shared module for the timer and the mine counter */
 
 .counter {
   border: 1px solid rgb(66, 55, 41);

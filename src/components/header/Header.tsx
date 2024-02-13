@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./Header.module.scss";
+import styles from "./Header.module.css";
 import { useGameStateContext } from "../../hooks/useGameStateContext";
 import { useSettingsContext } from "../../hooks/useSettingsContext";
 import SettingsModal from "../settingsModal/SettingsModal";

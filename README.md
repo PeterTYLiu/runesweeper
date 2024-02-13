@@ -4,7 +4,7 @@
 - Customizable controls
 - Installable for offline play
 
-Built with Vite + React + TypeScript + SASS
+Built with Vite + React + TypeScript
 
 ---
 

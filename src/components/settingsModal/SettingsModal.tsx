@@ -1,6 +1,6 @@
 import { useRef, useEffect, type Dispatch } from "react";
-import { Settings, useSettingsContext } from "../../hooks/useSettingsContext";
-import styles from "./SettingsModal.module.scss";
+import { type Settings, useSettingsContext } from "../../hooks/useSettingsContext";
+import styles from "./SettingsModal.module.css";
 import { sizesDict, difficultiesDict, controlsDict } from "../../utils/settings";
 
 export default function SettingsModal({ shown, setShown }: { shown: boolean; setShown: Dispatch<boolean> }) {

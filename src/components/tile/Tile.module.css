@@ -34,31 +34,30 @@
     margin: 0;
     text-shadow: none;
   }
-}
-
-.is-1 {
-  color: rgb(138, 88, 0);
-}
-.is-2 {
-  color: green;
-}
-.is-3 {
-  color: rgb(201, 0, 0);
-}
-.is-4 {
-  color: blue;
-}
-.is-5 {
-  color: purple;
-}
-.is-6 {
-  color: rgb(0, 131, 151);
-}
-.is-7 {
-  color: rgb(159, 0, 101);
-}
-.is-8 {
-  color: black;
+  &.is-1 {
+    color: rgb(138, 88, 0);
+  }
+  &.is-2 {
+    color: green;
+  }
+  &.is-3 {
+    color: rgb(201, 0, 0);
+  }
+  &.is-4 {
+    color: blue;
+  }
+  &.is-5 {
+    color: purple;
+  }
+  &.is-6 {
+    color: rgb(0, 131, 151);
+  }
+  &.is-7 {
+    color: rgb(159, 0, 101);
+  }
+  &.is-8 {
+    color: black;
+  }
 }
 
 @keyframes plantFlag {

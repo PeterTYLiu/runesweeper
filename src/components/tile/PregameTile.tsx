@@ -1,4 +1,4 @@
-import styles from "./Tile.module.scss";
+import styles from "./Tile.module.css";
 import { useGameStateContext } from "../../hooks/useGameStateContext";
 import { useSettingsContext } from "../../hooks/useSettingsContext";
 import generateTiles from "../../utils/generateTiles";
