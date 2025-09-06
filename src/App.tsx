@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-import { defaultSettings, SettingsContext, type Settings } from "./hooks/useSettingsContext";
-import { GameStateContext, type GameState } from "./hooks/useGameStateContext";
 import confetti from "canvas-confetti";
+import { useEffect, useState } from "react";
 import styles from "./App.module.css";
-import generateTiles from "./utils/generateTiles";
-import Tile from "./components/tile/Tile";
-import PregameTile from "./components/tile/PregameTile";
 import Header from "./components/header/Header";
+import PregameTile from "./components/tile/PregameTile";
+import Tile from "./components/tile/Tile";
+import { GameStateContext, type GameState } from "./hooks/useGameStateContext";
+import { defaultSettings, SettingsContext, type Settings } from "./hooks/useSettingsContext";
+import generateTiles from "./utils/generateTiles";
 
-const version = "1.0.7";
+const version = "1.0.8";
 
 function App() {
   const settingsOnLoad: Settings = { ...defaultSettings };

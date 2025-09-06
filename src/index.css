@@ -84,6 +84,10 @@ button:hover {
   background-image: linear-gradient(#ffffff20, #ffffff20), url("/images/bg-gray.png");
 }
 
+html {
+  overscroll-behavior: none;
+}
+
 body {
   margin: 0;
   padding: 12px;
