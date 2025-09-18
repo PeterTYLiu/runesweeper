@@ -8,7 +8,7 @@ import { GameStateContext, type GameState } from "./hooks/useGameStateContext";
 import { defaultSettings, SettingsContext, type Settings } from "./hooks/useSettingsContext";
 import generateTiles from "./utils/generateTiles";
 
-const version = "1.0.9";
+const version = "1.0.10";
 
 function App() {
   const settingsOnLoad: Settings = { ...defaultSettings };

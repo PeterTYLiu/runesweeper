@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 import { useGameStateContext } from "../../hooks/useGameStateContext";
 import { useSettingsContext } from "../../hooks/useSettingsContext";
 import generateTiles from "../../utils/generateTiles";
@@ -9,12 +9,18 @@ import Timer from "../timer/Timer";
 import styles from "./Header.module.css";
 
 export default function Header() {
-  const [settingsModalShown, setSettingsModalShown] = useState(false);
-  const [aboutModalShown, setAboutModalShown] = useState(localStorage.getItem("showAboutModal") ? false : true);
+  const aboutModalRef = useRef<HTMLDialogElement>(null);
+  const settingsModalRef = useRef<HTMLDialogElement>(null);
+
   const { gameState, setGameState } = useGameStateContext();
   const { settings } = useSettingsContext();
 
   const { status } = gameState;
+
+  useEffect(() => {
+    const hasSeenAbout = localStorage.getItem("showAboutModal");
+    if (!hasSeenAbout) aboutModalRef.current?.showModal();
+  }, []);
 
   // Reset to pre-game state
   function reset() {
@@ -39,17 +45,17 @@ export default function Header() {
           <MineCounter />
         ) : (
           <>
-            <button onClick={() => setAboutModalShown(true)}>
+            <button onClick={() => aboutModalRef.current?.showModal()}>
               <img src="./images/info.png" />
             </button>
-            <button onClick={() => setSettingsModalShown(true)}>
+            <button onClick={() => settingsModalRef.current?.showModal()}>
               <img src="./images/settings.png" />
             </button>
           </>
         )}
       </div>
-      <SettingsModal shown={settingsModalShown} setShown={setSettingsModalShown} />
-      <AboutModal shown={aboutModalShown} setShown={setAboutModalShown} />
+      <SettingsModal settingsModalRef={settingsModalRef} />
+      <AboutModal aboutModalRef={aboutModalRef} />
     </header>
   );
 }

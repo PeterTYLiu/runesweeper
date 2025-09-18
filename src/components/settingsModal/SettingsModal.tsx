@@ -1,19 +1,13 @@
-import { useRef, useEffect, type Dispatch } from "react";
+import { RefObject } from "react";
 import { type Settings, useSettingsContext } from "../../hooks/useSettingsContext";
+import { controlsDict, difficultiesDict, sizesDict } from "../../utils/settings";
 import styles from "./SettingsModal.module.css";
-import { sizesDict, difficultiesDict, controlsDict } from "../../utils/settings";
 
-export default function SettingsModal({ shown, setShown }: { shown: boolean; setShown: Dispatch<boolean> }) {
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
+export default function SettingsModal({ settingsModalRef }: { settingsModalRef: RefObject<HTMLDialogElement | null> }) {
   const { settings, setSettings } = useSettingsContext();
 
   const { numOfColumns, numOfRows } = settings;
   const numOfTiles = numOfColumns * numOfRows;
-
-  useEffect(() => {
-    if (shown) dialogRef.current?.showModal();
-    else dialogRef.current?.close();
-  }, [shown]);
 
   function handleChangeSize(w: number, h: number) {
     localStorage.setItem("numOfColumns", `${w}`);
@@ -32,10 +26,11 @@ export default function SettingsModal({ shown, setShown }: { shown: boolean; set
   }
 
   return (
-    <dialog ref={dialogRef} className={styles.dialog}>
+    // @ts-ignore since closedby is not recognized by TS yet
+    <dialog ref={settingsModalRef} className={styles.dialog} closedBy="any">
       <header>
         <h1>Settings</h1>
-        <button onClick={() => setShown(false)} className="icon">
+        <button onClick={() => settingsModalRef.current?.close()} className="icon">
           <img src="./images/close.png" />
         </button>
       </header>

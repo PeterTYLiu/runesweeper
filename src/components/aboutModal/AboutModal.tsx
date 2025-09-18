@@ -1,18 +1,14 @@
-import { useEffect, useRef, type Dispatch } from "react";
+import { RefObject } from "react";
 import styles from "./AboutModal.module.css";
 
-export default function AboutModal({ shown, setShown }: { shown: boolean; setShown: Dispatch<boolean> }) {
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
-
-  useEffect(() => {
-    if (shown) {
-      dialogRef.current?.removeAttribute("open");
-      dialogRef.current?.showModal();
-    } else dialogRef.current?.close();
-  }, [shown]);
+export default function AboutModal({ aboutModalRef }: { aboutModalRef: RefObject<HTMLDialogElement | null> }) {
+  const indicateAboutModalHasBeenSeen = () => {
+    localStorage.setItem("showAboutModal", "false");
+  };
 
   return (
-    <dialog ref={dialogRef} className={styles.dialog}>
+    // @ts-ignore since closedby is not recognized by TS yet
+    <dialog ref={aboutModalRef} className={styles.dialog} closedby="any" onClose={indicateAboutModalHasBeenSeen}>
       <header>
         <p>Welcome to</p>
         <h1>RuneSweeper</h1>
@@ -37,8 +33,8 @@ export default function AboutModal({ shown, setShown }: { shown: boolean; setSho
       <button
         className={styles.start}
         onClick={() => {
-          localStorage.setItem("showAboutModal", "false");
-          setShown(false);
+          indicateAboutModalHasBeenSeen();
+          aboutModalRef.current?.close();
         }}
       >
         Play
