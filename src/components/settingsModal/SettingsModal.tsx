@@ -1,4 +1,4 @@
-import { RefObject } from "react";
+import type { RefObject } from "react";
 import { type Settings, useSettingsContext } from "../../hooks/useSettingsContext";
 import { controlsDict, difficultiesDict, sizesDict } from "../../utils/settings";
 import styles from "./SettingsModal.module.css";

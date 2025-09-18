@@ -1,4 +1,4 @@
-import { RefObject } from "react";
+import type { RefObject } from "react";
 import styles from "./AboutModal.module.css";
 
 export default function AboutModal({ aboutModalRef }: { aboutModalRef: RefObject<HTMLDialogElement | null> }) {
