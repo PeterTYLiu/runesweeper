@@ -1,9 +1,9 @@
 import { useSwipeable } from "react-swipeable";
 import { GameState, useGameStateContext } from "../../hooks/useGameStateContext";
 import { useSettingsContext } from "../../hooks/useSettingsContext";
-import styles from "./Tile.module.css";
 import chord from "../../utils/chord";
 import floodFill from "../../utils/floodFill";
+import styles from "./Tile.module.css";
 
 type FlagStatus = "flagged" | "maybe" | "unflagged";
 
