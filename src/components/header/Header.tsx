@@ -1,12 +1,12 @@
 import { useState } from "react";
-import styles from "./Header.module.css";
 import { useGameStateContext } from "../../hooks/useGameStateContext";
 import { useSettingsContext } from "../../hooks/useSettingsContext";
-import SettingsModal from "../settingsModal/SettingsModal";
-import AboutModal from "../aboutModal/AboutModal";
-import Timer from "../timer/Timer";
-import MineCounter from "../mineCounter/MineCounter";
 import generateTiles from "../../utils/generateTiles";
+import AboutModal from "../aboutModal/AboutModal";
+import MineCounter from "../mineCounter/MineCounter";
+import SettingsModal from "../settingsModal/SettingsModal";
+import Timer from "../timer/Timer";
+import styles from "./Header.module.css";
 
 export default function Header() {
   const [settingsModalShown, setSettingsModalShown] = useState(false);

@@ -1,4 +1,4 @@
-import { useRef, useEffect, type Dispatch } from "react";
+import { useEffect, useRef, type Dispatch } from "react";
 import styles from "./AboutModal.module.css";
 
 export default function AboutModal({ shown, setShown }: { shown: boolean; setShown: Dispatch<boolean> }) {
