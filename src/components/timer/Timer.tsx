@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGameStateContext } from "../../hooks/useGameStateContext";
 import { useSettingsContext } from "../../hooks/useSettingsContext";
-import RecordModal from "../recordModal/RecordModal";
-import InstaloseToast from "../instaloseToast/InstaloseToast";
 import styles from "../../styles/counter.module.css";
+import InstaloseToast from "../instaloseToast/InstaloseToast";
+import RecordModal from "../recordModal/RecordModal";
 
 export default function Timer() {
   const { gameState, setGameState } = useGameStateContext();
   const { settings } = useSettingsContext();
   const [timeElapsed, setTimeElapsed] = useState(0);
-  const [recordModalShown, setRecordModalShown] = useState(false);
+  const recordModalRef = useRef<HTMLDialogElement>(null);
   const [instaloseModalOpen, setInstaloseModalOpen] = useState(false);
   const [record, setRecord] = useState<number | null>(null);
   const [prevRecord, setPrevRecord] = useState<number | null>(null);
@@ -42,7 +42,7 @@ export default function Timer() {
     if (status === "won" && (typeof record !== "number" || timeElapsed < record)) {
       setPrevRecord(record);
       setRecord(timeElapsed);
-      setRecordModalShown(true);
+      recordModalRef.current?.showModal();
       localStorage.setItem(`${numOfColumns * numOfRows}tiles${mineRatio}mineRatio`, timeElapsed.toString());
     }
   }, [status, timeElapsed]);
@@ -54,7 +54,7 @@ export default function Timer() {
 
   return (
     <div className={styles.counter}>
-      <RecordModal shown={recordModalShown} setShown={setRecordModalShown} record={record} oldRecord={prevRecord} />
+      <RecordModal ref={recordModalRef} record={record} oldRecord={prevRecord} />
       <InstaloseToast open={instaloseModalOpen} />
       {status !== "pre" && <img src="./images/watch.webp" />}
       <span>{status === "pre" ? (record ? `Best: ${record}s` : "No best time") : timeElapsed.toFixed(1) + "s"}</span>

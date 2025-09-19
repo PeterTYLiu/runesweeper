@@ -8,7 +8,7 @@ import { GameStateContext, type GameState } from "./hooks/useGameStateContext";
 import { defaultSettings, SettingsContext, type Settings } from "./hooks/useSettingsContext";
 import generateTiles from "./utils/generateTiles";
 
-const version = "1.0.12";
+const version = "1.0.13";
 
 function App() {
   const settingsOnLoad: Settings = { ...defaultSettings };
@@ -43,7 +43,7 @@ function App() {
     }
   }, [gameState]);
 
-  // The depending on which pre-game tile the user clicks, we generate a board such that
+  // Then depending on which pre-game tile the user clicks, we generate a board such that
   // the tile they clicked triggers a cascade.
   const pregameTiles = tiles
     .filter((t) => t.c === 1)

@@ -1,20 +1,17 @@
-import { useRef, useEffect, type Dispatch } from "react";
-import styles from "./RecordModal.module.css";
+import { type RefObject } from "react";
 import { useSettingsContext } from "../../hooks/useSettingsContext";
 import { difficultiesDict, sizesDict } from "../../utils/settings";
+import styles from "./RecordModal.module.css";
 
 export default function RecordModal({
-  shown,
-  setShown,
+  ref,
   record,
   oldRecord,
 }: {
-  shown: boolean;
-  setShown: Dispatch<boolean>;
+  ref: RefObject<HTMLDialogElement | null>;
   record: number | null;
   oldRecord?: number | null;
 }) {
-  const dialogRef = useRef<HTMLDialogElement | null>(null);
   const { settings } = useSettingsContext();
 
   const { numOfColumns, mineRatio } = settings;
@@ -22,13 +19,9 @@ export default function RecordModal({
   const difficulty = Object.values(difficultiesDict).find((d) => d.mineRatio === mineRatio)!;
   const size = Object.values(sizesDict).find((s) => s.w === numOfColumns)!;
 
-  useEffect(() => {
-    if (shown) dialogRef.current?.showModal();
-    else dialogRef.current?.close();
-  }, [shown]);
-
   return (
-    <dialog ref={dialogRef} className={styles.dialog}>
+    // @ts-ignore since closedby is not recognized by TS yet
+    <dialog ref={ref} className={styles.dialog} closedby="any">
       <header>
         <img src="./images/phat-green.png" />
         <h2>New record!</h2>
@@ -43,7 +36,7 @@ export default function RecordModal({
           Previous record: <strong>{oldRecord}s</strong>
         </p>
       )}
-      <button className={styles.done} onClick={() => setShown(false)}>
+      <button className={styles.done} onClick={() => ref.current?.close()}>
         Wonderful!
       </button>
     </dialog>
